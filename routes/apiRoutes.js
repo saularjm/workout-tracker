@@ -11,6 +11,16 @@ module.exports = function(app) {
         })
     })
 
+    app.get("/api/workouts/:id", (req, res) => {
+        db.Workout.find({_id:req.params.id})
+        .then(workout => {
+            res.json(workout);
+        })
+        .catch(err => {
+            res.json(err);
+        })
+    })
+
     app.post("/api/workouts", (req, res) => {
         db.Workout.create({})
         .then(workout => {
@@ -32,7 +42,7 @@ module.exports = function(app) {
     })
 
     app.get("/api/workouts/range", (req, res) => {
-        db.Workout.find({})
+        db.Workout.find({}).sort({_id:1}).limit(7).populate("exercises")
         .then(workout => {
             res.json(workout);
         })

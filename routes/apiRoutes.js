@@ -12,7 +12,7 @@ module.exports = function(app) {
     })
 
     app.post("/api/workouts", ({req}, res) => {
-        db.Workout.create(req)
+        db.Workout.create({req})
         .then(workout => {
             res.json(workout);
         })
@@ -21,7 +21,15 @@ module.exports = function(app) {
         })
     })
 
-    // PUT
+    app.put("/api/workouts/:id", ({body, params}, res) => {
+        db.Workout.findByIdAndUpdate(params.id, {$push: {exercises: body}}, {new: true, runValidators: true})
+        .then(workout => {
+            res.json(workout);
+        })
+        .catch(err => {
+            res.json(err);
+        })
+    })
 
     // Get in range
 }

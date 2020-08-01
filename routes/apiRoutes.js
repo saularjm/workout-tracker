@@ -11,8 +11,8 @@ module.exports = function(app) {
         })
     })
 
-    app.post("/api/workouts", ({req}, res) => {
-        db.Workout.create({req})
+    app.post("/api/workouts", (req, res) => {
+        db.Workout.create({})
         .then(workout => {
             res.json(workout);
         })
@@ -22,7 +22,7 @@ module.exports = function(app) {
     })
 
     app.put("/api/workouts/:id", ({body, params}, res) => {
-        db.Workout.findByIdAndUpdate(params.id, {$push: {exercises: body}}, {new: true, runValidators: true})
+        db.Workout.findByIdAndUpdate(params.id, {$push: {exercises: body}})
         .then(workout => {
             res.json(workout);
         })

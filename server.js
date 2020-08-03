@@ -2,8 +2,9 @@ const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3030;
 
+const db = require("./models/workouts.js");
 const app = express();
 
 app.use(logger("dev"));

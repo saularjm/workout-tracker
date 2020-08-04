@@ -1,3 +1,4 @@
+// Require Mongoose, models and connect to mongodb
 let mongoose = require("mongoose");
 let db = require("../models");
 
@@ -6,6 +7,7 @@ mongoose.connect("mongodb://localhost/workout", {
   useFindAndModify: false
 });
 
+// Array of workouts to add as seed to db
 let workoutSeed = [
   {
     day: new Date().setDate(new Date().getDate()-10),
@@ -124,6 +126,7 @@ let workoutSeed = [
   }
 ];
 
+// Clear db then insert seed from above
 db.Workout.deleteMany({})
   .then(() => db.Workout.collection.insertMany(workoutSeed))
   .then(data => {

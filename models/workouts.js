@@ -1,7 +1,8 @@
+// Require Mongoose
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
+// New schema for workout db
 const workoutSchema = new Schema({
     day: {
         type: Date,
@@ -45,6 +46,7 @@ const workoutSchema = new Schema({
     }
 })
 
+// Function to create a total duration
 workoutSchema.virtual("totalDuration").get(function() {
     return this.exercises.reduce((total, exercise) => {
         return total + exercise.duration;

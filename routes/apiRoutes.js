@@ -1,6 +1,17 @@
 const db = require("../models");
 
 module.exports = function(app) {
+    app.get("/api/workouts/range", (req, res) => {
+        db.Workout.find({})
+        .sort({_id:1}).limit(7).populate("exercises")
+        .then(workout => {
+            res.json(workout);
+        })
+        .catch(err => {
+            res.json(err);
+        })
+    })
+    
     app.get("/api/workouts", (req, res) => {
         db.Workout.find({})
         .then(workout => {
@@ -43,17 +54,6 @@ module.exports = function(app) {
 
     app.put("/api/workouts", ({body}, res) => {
         db.Workout.updateOne(body)
-        .then(workout => {
-            res.json(workout);
-        })
-        .catch(err => {
-            res.json(err);
-        })
-    })
-
-    app.get("/api/workouts/range", (req, res) => {
-        db.Workout.find({})
-        .sort({_id:1}).limit(7).populate("exercises")
         .then(workout => {
             res.json(workout);
         })

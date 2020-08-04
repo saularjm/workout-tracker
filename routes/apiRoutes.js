@@ -52,7 +52,8 @@ module.exports = function(app) {
     })
 
     app.get("/api/workouts/range", (req, res) => {
-        db.Workout.find({}).sort({_id:1}).limit(7).populate("exercises")
+        db.Workout.find({})
+        .sort({_id:1}).limit(7).populate("exercises")
         .then(workout => {
             res.json(workout);
         })

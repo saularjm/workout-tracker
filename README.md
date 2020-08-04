@@ -34,4 +34,4 @@ to it.
 ## Deployed
 
 - Check out the deployed app:
-    - 
+    - https://tranquil-wildwood-57886.herokuapp.com/
